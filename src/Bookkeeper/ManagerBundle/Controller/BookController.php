@@ -8,15 +8,15 @@ use Symfony\Component\HttpFoundation\Request;
 class BookController extends Controller {
 
 	public function indexAction() {
-
+		return $this->render('BookkeeperManagerBundle:Book:index.html.twig');
 	}
 
 	public function showAction($id) {
-		
+		return $this->render('BookkeeperManagerBundle:Book:show.html.twig');
 	}
 
 	public function newAction() {
-		
+		return $this->render('BookkeeperManagerBundle:Book:new.html.twig');
 	}
 
 	public function createAction(Request $request) {
@@ -24,7 +24,7 @@ class BookController extends Controller {
 	}
 
 	public function editAction($id) {
-		
+		return $this->render('BookkeeperManagerBundle:Book:edit.html.twig');
 	}
 
 	public function updateAction(Request $request, $id) {
