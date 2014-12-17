@@ -12,7 +12,7 @@ book_new:
 
 book_create:
     path: /create
-    defaults: { _controller: "BookkeeperManagerBundle:Book:create "}
+    defaults: { _controller: "BookkeeperManagerBundle:Book:create"}
     requirements: { _method: post }
 
 book_edit:

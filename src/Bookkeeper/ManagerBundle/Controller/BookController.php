@@ -29,11 +29,36 @@ class BookController extends Controller {
 
 		return $this->render('BookkeeperManagerBundle:Book:new.html.twig', array(
 			'form'=>$form->createView()
-			));
+		));
 	}
 
-	public function createAction(Request $request) {
-		
+	public function createAction(Request $request) {	
+		$book = new Book();
+
+		$form = $this->createForm(new BookType(), $book, array(
+			'action'=>$this->generateUrl('book_create'),
+			'method'=>'POST'
+		));
+
+		$form->add('submit', 'submit', array('label'=>'Create Book'));
+
+		$form->handleRequest($request);
+
+		if ($form->isValid()) {
+			$em = $this->getDoctrine()->getManager();
+			$em->persist($book);
+			$em->flush();
+
+			$this->get('session')->getFlashBag()->add('msg', 'Your book has been created!');
+
+			return $this->redirect($this->generateUrl('book_new'));
+		}
+
+			$this->get('session')->getFlashBag()->add('msg', 'Yo, something went wrong');
+
+			return $this->render('BookkeeperManagerBundle:Book:new.html.twig', array(
+				'form'=>$form->createView()
+			));
 	}
 
 	public function editAction($id) {
